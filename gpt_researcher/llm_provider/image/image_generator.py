@@ -77,11 +77,7 @@ class ImageGeneratorProvider:
         if self._client is None:
             try:
                 from google import genai
-                from google.genai import types
-                self._client = genai.Client(
-                    api_key=self.api_key,
-                    http_options=types.HttpOptions(api_version='v1beta'),
-                )
+                self._client = genai.Client(api_key=self.api_key)
                 logger.info(f"Initialized image generation with model: {self.model_name}")
             except ImportError:
                 raise ImportError(
