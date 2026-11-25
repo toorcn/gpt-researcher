@@ -151,6 +151,7 @@ export default function MobileLayout({
               <h3 className="text-sm font-medium text-gray-200">Research History</h3>
               <button 
                 onClick={() => setShowHistory(false)}
+                aria-label="Close research history"
                 className="text-gray-400 hover:text-gray-300"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -216,6 +217,7 @@ export default function MobileLayout({
               <h3 className="text-sm font-medium text-gray-200">Settings</h3>
               <button 
                 onClick={() => setShowSettings(false)}
+                aria-label="Close settings"
                 className="text-gray-400 hover:text-gray-300"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
