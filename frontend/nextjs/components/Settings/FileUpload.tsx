@@ -62,7 +62,7 @@ const FileUpload = () => {
               {files.map(file => (
                 <li key={file} className={"flex justify-between gap-x-6 py-1"}>
                   <span className={"flex-1"}>{file}</span>
-                  <button onClick={(e) => { e.preventDefault(); deleteFile(file) }}>
+                  <button aria-label={`Delete ${file}`} onClick={(e) => { e.preventDefault(); deleteFile(file) }}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                         stroke="currentColor" className="size-6">
                       <path strokeLinecap="round" strokeLinejoin="round"
