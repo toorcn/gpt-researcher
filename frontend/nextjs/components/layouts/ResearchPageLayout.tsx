@@ -60,6 +60,7 @@ export default function ResearchPageLayout({
       
       {showScrollButton && showResult && (
         <button
+          aria-label="Scroll to bottom"
           onClick={onScrollToBottom}
           className="fixed bottom-8 right-8 flex items-center justify-center w-12 h-12 text-white bg-gradient-to-br from-teal-500 to-teal-600 rounded-full hover:from-teal-600 hover:to-teal-700 transform hover:scale-105 transition-all duration-200 shadow-lg z-50 backdrop-blur-sm border border-teal-400/20"
         >

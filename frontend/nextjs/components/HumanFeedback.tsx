@@ -25,6 +25,7 @@ const HumanFeedback: React.FC<HumanFeedbackProps> = ({ questionForHuman, websock
       <p className="mb-4">{questionForHuman}</p>
       <form onSubmit={handleSubmit}>
         <textarea
+          aria-label="Feedback"
           className="w-full p-2 border rounded-md"
           value={userFeedback}
           onChange={(e) => setUserFeedback(e.target.value)}

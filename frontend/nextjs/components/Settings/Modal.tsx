@@ -119,6 +119,7 @@ const Modal: React.FC<ChatBoxProps> = ({ chatBoxSettings, setChatBoxSettings }) 
                     <span className="text-teal-400">Preferences</span>
                   </h3>
                   <button
+                    aria-label="Close preferences"
                     className="p-1 ml-auto text-gray-400 hover:text-white transition-colors duration-200"
                     onClick={() => setShowModal(false)}
                   >

@@ -348,6 +348,7 @@ export const GPTResearcher = ({
       </main>
       {showScrollButton && showResult && (
         <button
+          aria-label="Scroll to bottom"
           onClick={scrollToBottom}
           className="fixed bottom-8 right-8 flex items-center justify-center w-12 h-12 text-white bg-[rgb(168,85,247)] rounded-full hover:bg-[rgb(147,51,234)] transform hover:scale-105 transition-all duration-200 shadow-lg z-50"
         >

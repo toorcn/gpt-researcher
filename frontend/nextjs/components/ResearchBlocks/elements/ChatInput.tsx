@@ -94,6 +94,7 @@ const ChatInput: FC<TChatInputProps> = ({
         <div className="absolute -inset-1 bg-gradient-to-r from-teal-400/4 via-indigo-400/4 to-purple-400/4 blur-xl opacity-25 animate-pulse pointer-events-none"></div>
         
         <textarea
+          aria-label="Chat prompt"
           placeholder={placeholder}
           ref={textareaRef}
           className="focus-visible::outline-0 my-1 w-full pl-5 font-light not-italic leading-[normal] 
