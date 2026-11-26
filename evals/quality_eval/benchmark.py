@@ -53,8 +53,8 @@ QUERIES = {
 }
 
 CONFIGS = [
-    {"name": "single-gpt4o",      "arch": "single", "model": "gpt-4o"},
-    {"name": "single-gpt4o-mini", "arch": "single", "model": "gpt-4o-mini"},
+    {"name": "single-gpt4o",      "arch": "single", "model": "gpt-6-luna"},
+    {"name": "single-gpt4o-mini", "arch": "single", "model": "gpt-6-luna"},
     {"name": "multi-gpt4o",       "arch": "multi",  "model": "gpt-4o"},
     {"name": "multi-gpt4o-mini",  "arch": "multi",  "model": "gpt-4o-mini"},
 ]
