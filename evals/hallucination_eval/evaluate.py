@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 class HallucinationEvaluator:
     """Evaluates model outputs for hallucination using the judges library."""
     
-    def __init__(self, model: str = "openai/gpt-4o"):
+    def __init__(self, model: str = "openai/gpt-6-luna"):
         """Initialize the hallucination evaluator."""
             
         self.summary_judge = HaluEvalDocumentSummaryNonFactual(model=model)

@@ -77,7 +77,16 @@ class ImageGeneratorProvider:
         if self._client is None:
             try:
                 from google import genai
-                self._client = genai.Client(api_key=self.api_key)
+                from google.genai import types
+
+                # Preserve beta routing unless an explicit SDK environment override is set.
+                http_options = {}
+                if not os.getenv("GOOGLE_GENAI_API_VERSION"):
+                    http_options["api_version"] = "v1beta"
+                self._client = genai.Client(
+                    api_key=self.api_key,
+                    http_options=types.HttpOptions(**http_options),
+                )
                 logger.info(f"Initialized image generation with model: {self.model_name}")
             except ImportError:
                 raise ImportError(
