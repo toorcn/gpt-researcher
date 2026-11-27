@@ -227,6 +227,11 @@ class GenericLLMProvider:
             from langchain_anthropic import ChatAnthropic
 
             # Anthropic removed sampling controls; use prompts to guide behavior.
+            if kwargs.get("model_kwargs") is not None:
+                kwargs["model_kwargs"] = {
+                    key: value for key, value in kwargs["model_kwargs"].items()
+                    if key not in ("temperature", "top_p", "top_k")
+                }
             for parameter in ("temperature", "top_p", "top_k"):
                 kwargs.pop(parameter, None)
             llm = ChatAnthropic(**kwargs)
