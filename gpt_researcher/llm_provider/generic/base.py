@@ -165,8 +165,9 @@ class ChatLogger:
 class GenericLLMProvider:
 
     def __init__(self, llm, chat_log: str | None = None, verbose: bool = True,
-                 *, llm_timeout: float | None = None):
+                 *, llm_timeout: float | None = None, provider: str | None = None):
         self.llm = llm
+        self._provider = provider
         self.chat_logger = ChatLogger(chat_log) if chat_log else None
         self.verbose = verbose
         timeout = os.getenv("LLM_TIMEOUT", "300") if llm_timeout is None else llm_timeout
@@ -225,6 +226,14 @@ class GenericLLMProvider:
             _check_pkg("langchain_anthropic")
             from langchain_anthropic import ChatAnthropic
 
+            # Anthropic removed sampling controls; use prompts to guide behavior.
+            if kwargs.get("model_kwargs") is not None:
+                kwargs["model_kwargs"] = {
+                    key: value for key, value in kwargs["model_kwargs"].items()
+                    if key not in ("temperature", "top_p", "top_k")
+                }
+            for parameter in ("temperature", "top_p", "top_k"):
+                kwargs.pop(parameter, None)
             llm = ChatAnthropic(**kwargs)
         elif provider == "azure_openai":
             _check_pkg("langchain_openai")
@@ -432,7 +441,7 @@ class GenericLLMProvider:
             raise ValueError(
                 f"Unsupported {provider}.\n\nSupported model providers are: {supported}"
             )
-        return cls(llm, chat_log, verbose=verbose, llm_timeout=llm_timeout)
+        return cls(llm, chat_log, verbose=verbose, llm_timeout=llm_timeout, provider=provider)
 
     async def _await_llm_response(self, awaitable, *, streaming: bool = False):
         # Limit each wait for the provider, not time spent forwarding output to
@@ -454,6 +463,9 @@ class GenericLLMProvider:
 
 
     async def get_chat_response(self, messages, stream, websocket=None, **kwargs):
+        if self._provider == "anthropic":
+            for parameter in ("temperature", "top_p", "top_k"):
+                kwargs.pop(parameter, None)
         self._reset_last_response_metadata()
         if not stream:
             # Getting output from the model chain using ainvoke for asynchronous invoking
@@ -471,6 +483,9 @@ class GenericLLMProvider:
         return res
 
     async def stream_response(self, messages, websocket=None, **kwargs):
+        if self._provider == "anthropic":
+            for parameter in ("temperature", "top_p", "top_k"):
+                kwargs.pop(parameter, None)
         self._reset_last_response_metadata()
         paragraph = ""
         response = ""
