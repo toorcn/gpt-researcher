@@ -79,7 +79,7 @@ class ImageGeneratorProvider:
                 from google import genai
                 from google.genai import types
 
-                # Preserve the beta default unless an SDK version override is set.
+                # Preserve v1beta; a set GOOGLE_GENAI_API_VERSION takes precedence.
                 http_options = (
                     None if os.getenv("GOOGLE_GENAI_API_VERSION")
                     else types.HttpOptions(api_version="v1beta")
