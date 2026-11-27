@@ -225,6 +225,9 @@ class GenericLLMProvider:
             _check_pkg("langchain_anthropic")
             from langchain_anthropic import ChatAnthropic
 
+            # Anthropic removed sampling controls; use prompts to guide behavior.
+            for parameter in ("temperature", "top_p", "top_k"):
+                kwargs.pop(parameter, None)
             llm = ChatAnthropic(**kwargs)
         elif provider == "azure_openai":
             _check_pkg("langchain_openai")
